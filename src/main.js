@@ -6,13 +6,13 @@
 */
 
 function sumArray(numbers) {
-  // code here
+  return numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
 }
 
 // Використання функції
-// const exampleArray = [1, 2, 3, 4, 5]
-// const sum = sumArray(exampleArray)
-// console.log('Сума елементів масиву:', sum) // Виведення суми
+const exampleArray = [1, 2, 3, 4, 5]
+const sum = sumArray(exampleArray)
+console.log('Сума елементів масиву:', sum) // Виведення суми
 
 
 /*
@@ -22,13 +22,13 @@ function sumArray(numbers) {
 */
 
 function doubleArrayElements(numbers) {
-  // code here
+  return numbers.map((number) => number * 2)
 }
 
 // Використання функції
 // const exampleArray = [1, 2, 3, 4, 5]
-// const doubledArray = doubleArrayElements(exampleArray)
-// console.log('Подвоєні елементи масиву:', doubledArray) // Виведення подвоєних елементів
+const doubledArray = doubleArrayElements(exampleArray)
+console.log('Подвоєні елементи масиву:', doubledArray) // Виведення подвоєних елементів
 
 
 /*
@@ -52,14 +52,29 @@ function doubleArrayElements(numbers) {
 */
 
 class SkillsManager {
-  // code here
+  constructor() {
+    this.skills = []
+  }
+
+  addSkill(skill) {
+    if (typeof skill === 'string' && skill.length >= 2) {
+      this.skills.push(skill)
+      return skill
+    } else {
+      return null
+    }
+  }
+
+  getAllSkills() {
+    return this.skills
+  }
 }
 
-// const skillsManager = new SkillsManager()
-//
-// console.log(skillsManager.addSkill('JavaScript'))
-// console.log(skillsManager.addSkill('CSS'))
-// console.log(skillsManager.getAllSkills())
+const skillsManager = new SkillsManager()
+
+console.log(skillsManager.addSkill('JavaScript'))
+console.log(skillsManager.addSkill('CSS'))
+console.log(skillsManager.getAllSkills())
 
 
 /*
@@ -77,25 +92,27 @@ class SkillsManager {
  */
 
 function DateCalculator(initialDate) {
+  this.currentDate = new Date(initialDate)
+
   this.addDays = function(days) {
-    // code here
+    this.currentDate.setDate(this.currentDate.getDate() + days)
   }
 
   this.subtractDays = function(days) {
-    // code here
+    this.currentDate.setDate(this.currentDate.getDate() - days)
   }
 
   this.getResult = function() {
-    // code here
+    return this.currentDate.toISOString().split('T')[0]
   }
 }
 
 // Демонстрація використання
-// const dateCalculator = new DateCalculator('2023-01-01')
-// dateCalculator.addDays(5)
-// console.log(dateCalculator.getResult()) // Виводить нову дату після додавання днів
-//
-// dateCalculator.subtractDays(3)
-// console.log(dateCalculator.getResult()) // Виводить нову дату після віднімання днів
+const dateCalculator = new DateCalculator('2023-01-01')
+dateCalculator.addDays(5)
+console.log(dateCalculator.getResult()) // Виводить нову дату після додавання днів
 
-// export { doubleArrayElements, sumArray, SkillsManager, DateCalculator }
+dateCalculator.subtractDays(3)
+console.log(dateCalculator.getResult()) // Виводить нову дату після віднімання днів
+
+export { doubleArrayElements, sumArray, SkillsManager, DateCalculator }
